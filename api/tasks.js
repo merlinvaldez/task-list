@@ -40,10 +40,10 @@ router.param("id", async (req, res, next, id) => {
 router.put("/:id", requireBody(["title", "done"]), async (req, res) => {
   const { title, done } = req.body;
   const updatedTask = await updateTask(title, done, req.params.id);
-  res.status(201).send(updatedTask);
+  res.status(200).send(updatedTask);
 });
 
 router.delete("/:id", async (req, res) => {
   await deleteTask(req.params.id);
-  res.status(201).send("Task was deleted!");
+  res.status(204).send("Task was deleted!");
 });
