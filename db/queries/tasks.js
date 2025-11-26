@@ -23,7 +23,7 @@ export async function getTasksByUserId(user_id) {
   return tasks;
 }
 
-export async function getTasksById(id) {
+export async function getTaskById(id) {
   const sql = `
   SELECT *
   FROM tasks
@@ -33,4 +33,25 @@ export async function getTasksById(id) {
     rows: [task],
   } = await db.query(sql, [id]);
   return task;
+}
+
+export async function updateTask(title, done, taskId) {
+  const sql = `
+  UPDATE tasks
+    SET title = $1,
+    done =$2
+    WHERE id =$3
+    RETURNING *`;
+  const {
+    rows: [task],
+  } = await db.query(sql, [title, done, taskId]);
+  return task;
+}
+
+export async function deleteTask(id) {
+  const sql = `
+  DELETE from tasks WHERE id = $1 RETURNING *`;
+  const {
+    rows: [task],
+  } = await db.query(sql, [id]);
 }

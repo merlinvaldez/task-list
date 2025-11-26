@@ -20,7 +20,7 @@ export async function getUserByUsernameAndPassword(username, password) {
   const sql = `
     SELECT * 
     from users
-    were username=$1`;
+    WHERE username=$1`;
 
   const {
     rows: [user],
@@ -33,11 +33,11 @@ export async function getUserByUsernameAndPassword(username, password) {
   return user;
 }
 
-export async function getUserbyID(id) {
+export async function getUserById(id) {
   const sql = `
     SELECT * 
     from users
-    were username=$1`;
+    WHERE id=$1`;
 
   const {
     rows: [user],
